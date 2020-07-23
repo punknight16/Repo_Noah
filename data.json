@@ -1,0 +1,116 @@
+steps:
+  "1":
+    outputs: {}
+    inputs: {}
+    stepCounter: 1
+    name: ""
+    x: 0
+    y: 0
+    type: sourceInput
+    operation:
+      name: ""
+      database: PC_FIVETRAN_DB
+      type: sourceInput
+      dataset: GITHUB
+      table: ISSUE
+  "2":
+    outputs: {}
+    inputs: {}
+    stepCounter: 2
+    name: ""
+    x: 0
+    y: 0
+    type: sourceInput
+    operation:
+      name: ""
+      database: PC_FIVETRAN_DB
+      type: sourceInput
+      dataset: GITHUB
+      table: ISSUE_CLOSED_HISTORY
+  "3":
+    outputs: {}
+    inputs: {}
+    stepCounter: 3
+    name: <NewModel3>
+    x: 0
+    y: 0
+    type: sql
+    operation:
+      name: test
+      sqlType: View
+      type: sql
+      sql: |-
+        SELECT
+          ISSUE_ID AS ISSUE_ID,
+          UPDATED_AT AS UPDATED_AT,
+          CLOSED AS CLOSED,
+          ACTOR_ID AS ACTOR_ID,
+          COMMIT_SHA AS COMMIT_SHA,
+          _FIVETRAN_SYNCED AS _FIVETRAN_SYNCED
+        FROM
+          ${ISSUE_CLOSED_HISTORY}
+  "4":
+    outputs: {}
+    inputs: {}
+    stepCounter: 4
+    name: <NewModel4>
+    x: 0
+    y: 0
+    type: sql
+    operation:
+      name: NewModel4
+      sqlType: View
+      type: sql
+      sql: |-
+        SELECT
+          *
+        FROM
+          ${test}
+  "5":
+    outputs: {}
+    inputs: {}
+    stepCounter: 5
+    name: NewModel5
+    x: 0
+    y: 0
+    type: sql
+    operation:
+      name: NewModel5
+      sqlType: Table
+      type: sql
+      sql: |-
+        SELECT
+          *
+        FROM
+          ${NewModel4}
+  "6":
+    outputs: {}
+    inputs: {}
+    stepCounter: 6
+    name: NewModel6
+    x: 0
+    y: 0
+    type: sql
+    operation:
+      name: NewModel6
+      sqlType: View
+      type: sql
+      sql: |-
+        SELECT
+          *
+        FROM
+          ${NewModel5}
+treeData:
+  nodes:
+    - stepCounter: 1
+      nodes: []
+    - stepCounter: 2
+      nodes: []
+    - stepCounter: 3
+      nodes: []
+    - stepCounter: 4
+      nodes: []
+    - stepCounter: 5
+      nodes: []
+    - stepCounter: 6
+      nodes: []
