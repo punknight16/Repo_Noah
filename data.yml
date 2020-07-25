@@ -1,0 +1,83 @@
+ISSUE:
+  type: sourceInput
+  operation:
+    name: ""
+    database: PC_FIVETRAN_DB
+    type: sourceInput
+    dataset: GITHUB
+    table: ISSUE
+  stepCounter: 1
+ISSUE_CLOSED_HISTORY:
+  type: sourceInput
+  operation:
+    name: ""
+    database: PC_FIVETRAN_DB
+    type: sourceInput
+    dataset: GITHUB
+    table: ISSUE_CLOSED_HISTORY
+  stepCounter: 2
+NewModel4:
+  type: sql
+  operation:
+    name: NewModel4
+    sqlType: View
+    type: sql
+    sql: |-
+      SELECT
+        *
+      FROM
+        ${test}
+  stepCounter: 4
+NewModel5:
+  type: sql
+  operation:
+    name: NewModel5
+    sqlType: Table
+    type: sql
+    sql: |-
+      SELECT
+        *
+      FROM
+        ${NewModel4}
+  stepCounter: 5
+NewModel6:
+  type: sql
+  operation:
+    name: NewModel6
+    sqlType: View
+    type: sql
+    sql: |-
+      SELECT
+        *
+      FROM
+        ${NewModel5}
+  stepCounter: 6
+NewModel7:
+  type: sql
+  operation:
+    name: NewModel7
+    sqlType: View
+    type: sql
+    sql: |-
+      SELECT
+        *
+      FROM
+        ${NewModel6}
+  stepCounter: 7
+test:
+  type: sql
+  operation:
+    name: test
+    sqlType: View
+    type: sql
+    sql: |-
+      SELECT
+        ISSUE_ID AS ISSUE_ID,
+        UPDATED_AT AS UPDATED_AT,
+        CLOSED AS CLOSED,
+        ACTOR_ID AS ACTOR_ID,
+        COMMIT_SHA AS COMMIT_SHA,
+        _FIVETRAN_SYNCED AS _FIVETRAN_SYNCED
+      FROM
+        ${ISSUE_CLOSED_HISTORY}
+  stepCounter: 3
