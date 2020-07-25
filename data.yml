@@ -1,10 +1,4 @@
 ISSUE:
-  outputs: {}
-  inputs: {}
-  stepCounter: 1
-  name: ""
-  x: 0
-  y: 0
   type: sourceInput
   operation:
     name: ""
@@ -12,13 +6,8 @@ ISSUE:
     type: sourceInput
     dataset: GITHUB
     table: ISSUE
+  stepCounter: 1
 ISSUE_CLOSED_HISTORY:
-  outputs: {}
-  inputs: {}
-  stepCounter: 2
-  name: ""
-  x: 0
-  y: 0
   type: sourceInput
   operation:
     name: ""
@@ -26,13 +15,8 @@ ISSUE_CLOSED_HISTORY:
     type: sourceInput
     dataset: GITHUB
     table: ISSUE_CLOSED_HISTORY
+  stepCounter: 2
 NewModel4:
-  outputs: {}
-  inputs: {}
-  stepCounter: 4
-  name: <NewModel4>
-  x: 0
-  y: 0
   type: sql
   operation:
     name: NewModel4
@@ -43,13 +27,8 @@ NewModel4:
         *
       FROM
         ${test}
+  stepCounter: 4
 NewModel5:
-  outputs: {}
-  inputs: {}
-  stepCounter: 5
-  name: NewModel5
-  x: 0
-  y: 0
   type: sql
   operation:
     name: NewModel5
@@ -60,13 +39,8 @@ NewModel5:
         *
       FROM
         ${NewModel4}
+  stepCounter: 5
 NewModel6:
-  outputs: {}
-  inputs: {}
-  stepCounter: 6
-  name: NewModel6
-  x: 0
-  y: 0
   type: sql
   operation:
     name: NewModel6
@@ -77,30 +51,20 @@ NewModel6:
         *
       FROM
         ${NewModel5}
+  stepCounter: 6
 NewModel7:
   type: sql
   operation:
+    name: NewModel7
+    sqlType: View
+    type: sql
     sql: |-
       SELECT
         *
       FROM
         ${NewModel6}
-    name: NewModel7
-    sqlType: View
-    type: sql
-  inputs: {}
-  outputs: {}
-  name: NewModel7
   stepCounter: 7
-  x: 0
-  y: 0
 test:
-  outputs: {}
-  inputs: {}
-  stepCounter: 3
-  name: <NewModel3>
-  x: 0
-  y: 0
   type: sql
   operation:
     name: test
@@ -116,3 +80,4 @@ test:
         _FIVETRAN_SYNCED AS _FIVETRAN_SYNCED
       FROM
         ${ISSUE_CLOSED_HISTORY}
+  stepCounter: 3
