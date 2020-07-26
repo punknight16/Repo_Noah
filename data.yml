@@ -52,18 +52,6 @@ NewModel6:
       FROM
         ${NewModel5}
   stepCounter: 6
-NewModel7:
-  type: sql
-  operation:
-    name: NewModel7
-    sqlType: View
-    type: sql
-    sql: |-
-      SELECT
-        *
-      FROM
-        ${NewModel6}
-  stepCounter: 7
 test:
   type: sql
   operation:
@@ -81,3 +69,15 @@ test:
       FROM
         ${ISSUE_CLOSED_HISTORY}
   stepCounter: 3
+XusModel:
+  type: sql
+  operation:
+    name: XusModel
+    sqlType: Table
+    type: sql
+    sql: |-
+      SELECT
+        *
+      FROM
+        ${NewModel6}
+  stepCounter: 7
