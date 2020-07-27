@@ -52,6 +52,23 @@ NewModel6:
       FROM
         ${NewModel5}
   stepCounter: 6
+NewXu:
+  stepCounter: 8
+  type: sql
+  operation:
+    name: NewXu
+    sqlType: View
+    type: sql
+    sql: |-
+      SELECT
+        ISSUE_ID AS ISSUE_ID,
+        UPDATED_AT AS UPDATED_AT,
+        CLOSED AS CLOSED,
+        ACTOR_ID AS ACTOR_ID,
+        COMMIT_SHA AS COMMIT_SHA,
+        _FIVETRAN_SYNCED AS _FIVETRAN_SYNCED
+      FROM
+        ${XusModel}
 test:
   type: sql
   operation:
